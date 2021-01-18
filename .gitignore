@@ -1,2 +1,4 @@
-Dockerfile
-docker-compose.yml
+.idea
+misc.xml
+modules.xml
+vcs.xml
