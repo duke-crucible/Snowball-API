@@ -1,0 +1,84 @@
+# TODO: for open source, should we include this scan.yml ?
+include:
+  - project: 'Crucible/devops/gitlab-ci-templates'
+    file: 'scan.yml'
+
+stages:
+  # each jon is defined in one of these CI pipeline stages
+  - build # build the app images for deployment
+  - test  # run the app's automated test
+  - scan  # TODO: do we need scan stage for this open source project?
+  - deploy  # deploy the app to the cloud platform
+
+variables:
+  PLATFORM_APP_NAMESPACE: snowball
+  PLATFORM_APP_NAME: api
+
+  AWS_DEFAULT_REGION: us-east-1
+  BRANCH_BUILD_NUM: ${CI_PIPELINE_ID}_${CI_COMMIT_REF_SLUG}_${CI_COMMIT_SHORT_SHA}
+  AWS_ECR_REPO: 371341698719.dkr.ecr.us-east-1.amazonaws.com/snowball-gr
+  CI_REGISTRY: gitlab.dhe.duke.edu:4567
+  CI_REPOSITORY: crucible/snowball-api
+
+build:
+  stage: build
+  before_script:
+    - export CI_DOCKER_TAG=${CI_REGISTRY}/${CI_REPOSITORY}:${CI_COMMIT_REF_SLUG}-latest
+    - export AWS_DOCKER_TAG=${AWS_ECR_REPO}:${BRANCH_BUILD_NUM}
+
+  script:
+    # Login to CI registry and AWS registry
+    - docker login -u gitlab-ci-token -p ${CI_JOB_TOKEN} ${CI_REGISTRY}
+    - $(aws ecr get-login --no-include-email --region us-east-1)
+
+    # Get cached image if it exists
+    - docker pull ${CI_DOCKER_TAG} || true
+    # Build the cache image
+    - docker build --pull --cache-from ${CI_DOCKER_TAG} -t ${CI_DOCKER_TAG} .
+    # Tag for scanning
+    - docker tag ${CI_DOCKER_TAG} ${CI_REGISTRY}/${CI_REPOSITORY}:${BRANCH_BUILD_NUM}
+    # Tag for AWS deployment
+    - docker tag ${CI_DOCKER_TAG} ${AWS_DOCKER_TAG}
+
+    # Push for cache
+    - docker push ${CI_DOCKER_TAG}
+    # Push for scanning in scandocker stage
+    - docker push ${CI_REGISTRY}/${CI_REPOSITORY}:${BRANCH_BUILD_NUM}
+    # Push for AWS deployment
+    - docker push ${AWS_DOCKER_TAG}
+
+  tags:
+    - aws
+    - crucible
+    - docker
+
+# TODO: test stage
+
+scan:
+  allow_failure: false
+  extends: .scan_with_twistcli
+  stage: scan
+  before_script:
+    - export SCAN_IMAGE=${CI_REGISTRY}/${CI_REPOSITORY}:${BRANCH_BUILD_NUM}
+
+  tags:
+    - aws
+    - crucible
+    - docker
+
+
+deploy:
+  stage: deploy
+  only:
+    refs:
+      - dev
+      - prod
+
+  script:
+    - cd deploy && ./deploy.sh ${AWS_ECR_REPO}:${BRANCH_BUILD_NUM} ${CI_COMMIT_REF_NAME}
+
+  tags:
+    - aws
+    - crucible
+    - docker
+
