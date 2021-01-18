@@ -1,0 +1,95 @@
+{
+  "family": "snowball_gr-${ENV_NAME}",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "executionRoleArn": "${EXECUTION_ROLE_ARN}",
+  "taskRoleArn": "${TASK_ROLE_ARN}",
+  "cpu": "2048",
+  "memory": "4096",
+  "tags": [
+    {
+      "key": "project",
+      "value": "snowball"
+    },
+    {
+      "key": "env",
+      "value": "${ENV_NAME}"
+    }
+  ],
+  "containerDefinitions": [
+    {
+      "name": "hitch-sidecar",
+      "image": "371341698719.dkr.ecr.us-east-1.amazonaws.com/snowball_gr-hitch-sidecar:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 443
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/snowball_gr-${ENV_NAME}",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    },
+    {
+      "name": "snowball",
+      "image": "${DOCKER_IMAGE}",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8000
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/snowball_gr-${ENV_NAME}",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "environment": [
+        {
+          "name": "MONGODB_NAME",
+          "value": "${MONGODB_NAME}"
+        },
+        {
+          "name": "CLIENT_ID",
+          "value": "${CLIENT_ID}"
+        },
+        {
+          "name": "BASE_URI",
+          "value": "${BASE_URI}"
+        }
+      ],
+      "secrets": [
+        {
+          "name": "MONGODB_URI",
+          "valueFrom": "arn:aws:ssm:us-east-1:371341698719:parameter/snowball/${ENV_NAME}/MONGODB_URI"
+        },
+        {
+          "name": "REDCAP_API_KEY",
+          "valueFrom": "arn:aws:ssm:us-east-1:371341698719:parameter/snowball/${ENV_NAME}/REDCAP_API_KEY"
+        },
+        {
+          "name": "SENDGRID_API_KEY",
+          "valueFrom": "arn:aws:ssm:us-east-1:371341698719:parameter/snowball/${ENV_NAME}/SENDGRID_API_KEY"
+        },
+        {
+          "name": "SESSION_KEY",
+          "valueFrom": "arn:aws:ssm:us-east-1:371341698719:parameter/snowball/${ENV_NAME}/SESSION_KEY"
+        },
+        {
+          "name": "CLIENT_SECRET",
+          "valueFrom": "arn:aws:ssm:us-east-1:371341698719:parameter/snowball/${ENV_NAME}/CLIENT_SECRET"
+        }
+      ]
+    }
+  ]
+}
