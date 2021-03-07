@@ -1,0 +1,236 @@
+.btn:not(:disabled):not(.disabled) {
+}
+
+
+.form-control-inline {
+    min-width: 0;
+    width: auto;
+    display: inline;
+}
+
+/*Dashboard attributes*/
+
+
+/*Logos and title*/
+#sb-snowball-logo {
+	height: 80px;
+	width: 80px;
+	margin-right: 20px;
+	margin-top: 15px;
+}
+
+#sb-name {
+	color: #E7E7E7;
+	font-size: 40px;
+	margin-top: 18px;
+}
+
+#sb-intro {
+	background: #1abc9c;
+    color: white;
+
+}
+
+#sb-image-div {
+	margin-top: 30px;
+	text-align: center;
+}
+
+#sb-crucible-logo {
+	height : 120px;
+}
+
+
+
+
+/*Auto-logout Related Attributes*/
+
+#autologout-div{
+	text-align: center;
+	padding-top: 10px;
+}
+
+
+.autologout-dialog {
+	display:inline-block;
+}
+
+
+#time-out-modal-content {
+	text-align: center;
+}
+
+#cancel-auto-logout {
+	color: #E7E7E7;
+	background-color: #004381;
+}
+
+
+#logout-auto-logout {
+	color: #E7E7E7;
+	background-color: #004381;
+	margin-right: 40px;
+}
+
+
+
+
+
+
+
+
+/*Info Dialog Box*/
+#info-modal-dialog {
+  overflow-y:auto;
+  overflow-x:auto;
+  /*width:auto;*/
+  height:auto;
+}
+
+#info-modal-content {
+	overflow-x: hidden;
+}
+
+
+#info-dialog { overflow: auto !important; }
+
+
+
+/*Error Dialog Box*/
+#error-modal-dialog {
+  overflow-y:auto;
+  overflow-x:auto;
+  /*width:auto;*/
+  height:auto;
+}
+
+#error-modal-content {
+	overflow-x: hidden;
+}
+
+
+#error-dialog { overflow: auto !important; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Element level attributes*/
+i {
+	margin-top: 10px;
+}
+
+
+
+
+
+
+
+
+/*Class attributes for thumbnails and their contents*/
+.card {
+	text-align: center;
+}
+
+
+.thumbnail-option-icon {
+	font-size: 60px;
+}
+
+
+.sb-sub-menu {
+	background-color: #002D72;
+}
+
+
+.modal-header {
+	color: #E7E7E7;
+	background-color: #004381;
+}
+
+.close {
+	color: #E7E7E7;
+}
+
+.row {
+	margin-top: 40px;
+}
+
+
+
+
+/*Send Invite Message modal*/
+
+#sb-email-label-send-invite-message {
+	text-align: left;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+
+#sb-coupon-title-row {
+	height: 55px;
+}
+
+
+#sb-coupon-title {
+	height: 55px;
+}
+
+
+#sb-qr-code-and-instructions-row {
+	margin-bottom: 10px;
+	font-size: 20px;
+}
+
+
+#sb-qr-code {
+	max-width: 100%;
+}
+
+
+#sb-coupon-instructions {
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+#sb-instruction-list {
+	margin-top:20px;
+}
+
+li {
+	margin-bottom: 10px;
+}
+
+
+#sb-coupon-section {
+	background-color: #E7E7E7;
+}
+
+#sb-invite-coupon {
+	text-align: center;
+	font-family: monospace;
+	font-size: 40px;
+}
+
+#sb-daily-report-table {
+    table-layout: auto;
+}
+
+
+
+
+
+
+
