@@ -5,8 +5,11 @@ from src.app.config import logger,SENDGRID_FROM_ADDRESS,TTLD_GENERATION_TO_CONSE
 from xkcdpass import xkcd_password as xp
 from flask import make_response
 import json
-import os
-
+import os, sys
+import csv
+import pandas as pd
+from pymongo import MongoClient
+from datetime import date
 
 # send email via sendgrid template
 def send_email(recipient, token, template_id):
@@ -83,3 +86,39 @@ def count_list_of_lists(input_lists):
     return count
 
 
+def import_seeds():
+    mongo_client = MongoClient(MONGO_URI)
+    db = mongo_client[MONGODB_NAME]
+    collection = db["SeedReport"]
+
+    filepath = "../../test/test-data/seeds.csv"
+    cdir = os.path.dirname(__file__)
+    file_res = os.path.join(cdir, filepath)
+
+    df = pd.read_csv(file_res)
+    for index, row in df.iterrows():
+        collection.insert_one(create_seed_report_row(row))
+    logger.info(f"Successfully imported {file_res}")
+
+
+def _create_seed_report_row(csv_row):
+    return {
+        **{key: value for key, value in csv_row.items() if key in CSV_HEADERS},
+        "REPORT_DATE": str(date.today()),
+        "STATUS": _get_status(csv_row),
+    }
+
+
+def _get_status(csv_row):
+    excluded_email_addresses = {
+        "none@email.com",
+        "none@emailc.om",
+        "none@emil.aom",
+        "none@gmail.com",
+    }
+    should_be_excluded = (
+        not csv_row["MYC_VIEWED_DTTM"]
+        or not csv_row["EMAIL_ADDRESS"]
+        or csv_row["EMAIL_ADDRESS"] in excluded_email_addresses
+    )
+    return "EXCLUDE" if should_be_excluded else "ELIGIBLE"
