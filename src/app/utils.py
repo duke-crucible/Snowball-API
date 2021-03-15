@@ -97,7 +97,7 @@ def import_seeds():
 
     df = pd.read_csv(file_res)
     for index, row in df.iterrows():
-        collection.insert_one(create_seed_report_row(row))
+        collection.insert_one(_create_seed_report_row(row))
     logger.info(f"Successfully imported {file_res}")
 
 

@@ -36,6 +36,37 @@ STUDY_ACCESS = ['A', 'T']
 INVITE_ACCESS = ['A', 'T', 'C']
 EXTRACT_DATA_ACCESS = ['A', 'M']
 
+# MC seeds enrollment
+CSV_HEADERS = [
+    "MRN",
+    "PAT_NAME",
+    "PAT_AGE",
+    "PAT_SEX",
+    "RACE",
+    "ETHNIC_GROUP",
+    "LANGUAGE",
+    "EMAIL_ADDRESS",
+    "MOBILE_NUM",
+    "HOME_NUM",
+    "ADD_LINE_1",
+    "CITY",
+    "STATE",
+    "ZIP",
+    "ORDER_TYPE",
+    "TEST_NAME",
+    "TEST_RESULT",
+    "SPECIMN_TAKEN_DATE",
+    "SPECIMEN_SOURCE",
+    "SPECIMEN_TYPE",
+    "RESULT_DATE",
+    "ORDER_CLASS",
+    "MYC_RELEASE_DTTM",
+    "MYC_VIEWED_DTTM",
+    "HOSP_ADMSN_TIME",
+    "HOSP_DISCH_TIME",
+    "DEPARTMENT",
+]
+
 # MC seeds report columns and fields
 EMAIL_ADDRESS_FIELD = {"EMAIL_ADDRESS": 1, "_id": 0}
 STATUS_FIELD = {"STATUS": 1, "_id": 0}
