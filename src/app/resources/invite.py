@@ -34,6 +34,10 @@ class SeedStatus(Resource):
             current = db_utils.get_seed_report(
                 mrn, app.config["FIELDS_FROM_SEEDS_TO_PARTICIPANT"]
             )
+            if new_status == current["STATUS"]:
+                return utils.response_with_status_code(
+                    "No action taken, status not changed", status.HTTP_200_OK
+                )
             new_log = f"Changed STATUS to: {new_status} at {str(current_time)}"
             db_utils.update_seed_status(mrn, new_status, new_log)
 
@@ -241,7 +245,9 @@ def _send_coupon(participant=None, to_peer=False, token=None):
         recipient = participant[app.config["MOBILE_NUM"]]
     else:
         # should never come here
-        logger.error("Neither email nor cell phone number exists, cannot invite")
+        error_msg = "Failed to send token: neither email nor cell number exists"
+        logger.error(error_msg)
+        raise ValueError(error_msg)
 
     logger.debug("Invite recipient: " + recipient)
 
