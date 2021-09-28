@@ -1,0 +1,104 @@
+{
+  "ano9": {
+    "first_name": "Andrew",
+    "last_name": "Olson",
+    "email": "ano9@duke.edu",
+    "role": "A"
+  },
+  "woods004": {
+    "first_name": "Chris",
+    "last_name": "Woods",
+    "email": "woods004@duke.edu",
+    "role": "A"
+  },
+  "dkp20": {
+    "first_name": "Dana",
+    "last_name": "Pasquale",
+    "email": "dkp20@duke.edu",
+    "role": "A"
+  },
+  "dto2": {
+    "first_name": "Dianne",
+    "last_name": "Oliver-Clapsaddle",
+    "email": "dto2@duke.edu",
+    "role": "A"
+  },
+  "jmoody77": {
+    "first_name": "James",
+    "last_name": "Moody",
+    "email": "jmoody77@duke.edu",
+    "role": "A"
+  },
+  "pendz002": {
+    "first_name": "Margaret",
+    "last_name": "Pendzich",
+    "email": "pendz002@duke.edu",
+    "role": "A"
+  },
+  "ylm3": {
+    "first_name": "Yuhan",
+    "last_name": "McGee",
+    "email": "ylm3@duke.edu",
+    "role": "A"
+  },
+  "pag26": {
+    "first_name": "Pedro",
+    "last_name": "Altamirano",
+    "email": "pag26@duke.edu",
+    "role": "T"
+  },
+  "lizwills": {
+    "first_name": "Elizabeth",
+    "last_name": "Petzold",
+    "email": "lizwills@duke.edu",
+    "role": "T"
+  },
+  "mls141": {
+    "first_name": "Maria",
+    "last_name": "Guzman",
+    "email": "mls141@duke.edu",
+    "role": "T"
+  },
+  "wew2": {
+    "first_name": "Whitney",
+    "last_name": "Welsh",
+    "email": "wew2@duke.edu",
+    "role": "M"
+  },
+  "my109": {
+    "first_name": "Mark",
+    "last_name": "Yacoub",
+    "email": "my109@duke.edu",
+    "role": "M"
+  },
+  "rl41": {
+    "first_name": "Raul",
+    "last_name": "Louzao",
+    "email": "rl41@duke.edu",
+    "role": "L"
+  },
+  "chris015": {
+    "first_name": "Victoria",
+    "last_name": "Christian",
+    "email": "chris015@duke.edu",
+    "role": "V"
+  },
+  "mccal022": {
+    "first_name": "Jonathan",
+    "last_name": "McCall",
+    "email": "mccal022@duke.edu",
+    "role": "V"
+  },
+  "jo87": {
+    "first_name": "John",
+    "last_name": "Owens",
+    "email": "jo87@duke.edu",
+    "role": "C"
+  },
+  "testGR": {
+    "first_name": "Jenny",
+    "last_name": "Wang",
+    "email": "jjw64@duke.edu",
+    "role": "A"
+  }
+}
